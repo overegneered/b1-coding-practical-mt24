@@ -57,3 +57,7 @@ class Controller:
         self.previous_error = error
 
         return proportional + derivative
+
+    def reset(self) -> None:
+        self.x_position = 0
+        self.previous_error = 0.0
