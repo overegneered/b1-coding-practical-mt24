@@ -25,7 +25,7 @@ class Controller:
         self.derivative_gain = derivative_gain
         self.depth_reference = reference
 
-        self.x_position: int = 0
+        self.x_position: float = 0.0
         self.previous_error: float = 0.0
 
     def step(self, current_depth: float, current_velocity: float = 1.0) -> float:
@@ -48,8 +48,9 @@ class Controller:
         Assumes the UUV is travelling horizontally (in the :math:`x`-direction) at one
         unit per step.
         """
-        error: float = self.depth_reference[self.x_position] - current_depth
-        self.x_position += current_velocity * error
+        closest_x_position = int(np.round(self.x_position))
+        error: float = self.depth_reference[closest_x_position] - current_depth
+        self.x_position += current_velocity
 
         proportional = self.proportional_gain * error
         derivative = self.derivative_gain * (error - self.previous_error)
