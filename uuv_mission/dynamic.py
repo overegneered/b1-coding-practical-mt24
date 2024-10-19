@@ -105,7 +105,7 @@ class Mission:
         """
         mission_data = pd.read_csv(file_name)
         try:
-            return Mission(
+            return cls(
                 reference=mission_data["reference"].values,
                 cave_height=mission_data["cave_height"].values,
                 cave_depth=mission_data["cave_depth"].values,
